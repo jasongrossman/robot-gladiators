@@ -1,16 +1,45 @@
 var playerName = window.prompt("What is your robot's name?");
+var playerHealth = 100;
+var playerAttack = 10;
 
-console.log(playerName);
-console.log("This logs a string, good for leaving yourself a message");
-console.log(10+10);
-console.log("Our robot's name is " +playerName);
+console.log(playerName, playerAttack, playerHealth);
 
-window.alert("This is an alert! JavaScript is running!");
+var enemyName = "Roborto";
+var enemyHealth = 50;
+var enemyAttack = 12;
 
-//this creates a function named "fight"
+var fight = function() {
+    window.alert("Welcome to Robot Gladiators!");
+    //subtract playerAttack from enemyHealth
+    enemyHealth = enemyHealth - playerAttack;
+    //log a resulting message to console to confirm success
+    console.log(
+        playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining."
+);
 
-function fight() {
-    window.alert("The fight has begun!");
-}
+    //check enemy's health
+    if (enemyHealth <= 0) {
+        window.alert(enemyName + " has died!");
+    }
 
-//fight();
+    else {
+        window.alert(enemyName + "still has " + enemyHealth + " health left.")
+    }
+    //subtract enemyAttack from playerHealth
+    playerHealth = playerHealth - enemyAttack;
+
+    //log a resulting message to console to confirm success
+    console.log(
+        enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining.");
+    
+    //check players' health
+    if (playerHealth <= 0) {
+        window.alert(playerName + " has died!");
+    }
+
+    else {
+        window.alert(playerName + " still has " + playerHealth + " health left.");
+    }
+};
+
+fight();
