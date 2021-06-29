@@ -13,9 +13,9 @@ var enemyAttack = 12;
 
 
 // fight function
-var fight = function() {
+var fight = function(enemyNames) {
   // Alert players that they are starting the round
-  window.alert("Welcome to Robot Gladiators!");
+  while(enemyHealth > 0){
 
   // ask player if they'd like to fight or run
   var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
@@ -25,20 +25,20 @@ var fight = function() {
     // remove enemy's health by subtracting the amount set in the playerAttack variable
     enemyHealth = enemyHealth - playerAttack;
     console.log(
-      playerName + " attacked " + enemyNames[i] + ". " + enemyNames[i] + " now has " + enemyHealth + " health remaining."
+      playerName + " attacked " + enemyNames + ". " + enemyNames + " now has " + enemyHealth + " health remaining."
     );
 
     // check enemy's health
     if (enemyHealth <= 0) {
-      window.alert(enemyNames[i] + " has died!");
+      window.alert(enemyNames + " has died!");
     } else {
-      window.alert(enemyNames[i] + " still has " + enemyHealth + " health left.");
+      window.alert(enemyNames + " still has " + enemyHealth + " health left.");
     }
 
     // remove players's health by subtracting the amount set in the enemyAttack variable
     playerHealth = playerHealth - enemyAttack;
     console.log(
-      enemyNames[i] + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
+      enemyNames + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
     );
 
     // check player's health
@@ -66,11 +66,14 @@ var fight = function() {
   } else {
     window.alert("You need to pick a valid option. Try again!");
   }
+}
 };
 
 // run fight function to start game
 for(var i = 0; i < enemyNames.length; i++) {
-    fight(enemyNames[i]);
+    var pickedEnemyName = enemyNames[i];
+    enemyHealth = 50;
+    fight(pickedEnemyName);
 }
 
 
