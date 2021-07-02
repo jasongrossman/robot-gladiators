@@ -6,23 +6,38 @@ var randomNumber = function(min, max) {
     return value;
   };
   
+var fightOrSkip = function() {
+    //ask player to fight or skip
+    var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
+
+    //enter recursive here
+    if (promptFight ==="" || promptFight === null) {
+        window.alert("You need to provide a valid answer! Please try again");
+        return fightOrSkip();
+    }
+
+    //if player chooses skip
+    promptFight = promptFight.toLowerCase();
+    if (promptFight === "skip") {
+        var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+
+    if (confirmSkip) {
+        window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
+        playerInfo.playerMoney = playerInfo.money - 10;
+        shop();
+    }
+    return false;
+}
+}
+
   // fight function (now with parameter for enemy's object holding name, health, and attack values)
   var fight = function(enemy) {
     while (playerInfo.health > 0 && enemy.health > 0) {
       // ask player if they'd like to fight or run
-      var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
+      var fightOrSkip = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
   
       // if player picks "skip" confirm and then stop the loop
-      if (promptFight === "skip" || promptFight === "SKIP") {
-        // confirm player wants to skip
-        var confirmSkip = window.confirm("Are you sure you'd like to quit?");
-  
-        // if yes (true), leave fight
-        if (confirmSkip) {
-          window.alert(playerInfo.name + ' has decided to skip this fight. Goodbye!');
-          // subtract money from playerInfo.money for skipping
-          playerInfo.money = Math.max(0, playerInfo.money - 10);
-          console.log("playerInfo.money", playerInfo.money)
+      if (fightOrSkip()) {
           break;
         }
       }
@@ -62,10 +77,10 @@ var randomNumber = function(min, max) {
         window.alert(playerInfo.name + ' has died!');
         // leave while() loop if player is dead
         break;
-      } else {
+      } 
+      else {
         window.alert(playerInfo.name + ' still has ' + playerInfo.health + ' health left.');
       }
-    }
   };
   
   // function to start a new game
